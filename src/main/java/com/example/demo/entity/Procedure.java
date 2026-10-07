@@ -1,4 +1,4 @@
- package com.example.demo.entity;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,8 +35,10 @@ public class Procedure {
     private Boolean active = true;
 
     @Column(nullable = false, updatable = false)
-    @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }
-
-
